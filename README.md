@@ -1,116 +1,144 @@
-<p align="center">
-  <img src="frontend/public/logo.png" width="120" alt="SilentVoice Logo">
-</p>
+<div align="center">
+  <img src="frontend/public/logo.png" width="200" alt="SilentVoice Logo" style="border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
 
-# SilentVoice — Web-Based AI Sign Language Translator
+  # 🌟 SilentVoice
 
-**SilentVoice** is a real-time, browser-based, AI-powered communication tool that breaks the barrier between hearing and Deaf individuals. It offers real-time two-way translation between speech and three distinct sign languages (ASL, ISL, TSL), eliminating the need for a human interpreter.
+  **Next-Generation Web-Based AI Sign Language Translator**
 
-![Version](https://img.shields.io/badge/Version-4.1-blueviolet)
-![Next.js](https://img.shields.io/badge/Next.js-15.1-black)
-![PyTorch](https://img.shields.io/badge/PyTorch-AI-orange)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-Vision-blue)
+  *Breaking the barrier between hearing and Deaf individuals through real-time, browser-based, AI-powered communication.*
 
----
+  [![Next.js](https://img.shields.io/badge/Next.js-15.1-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+  [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)](https://pytorch.org/)
+  [![MediaPipe](https://img.shields.io/badge/MediaPipe-Vision-blue?style=for-the-badge)](https://developers.google.com/mediapipe)
+  [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![Version](https://img.shields.io/badge/Version-4.1-blueviolet?style=for-the-badge)](#)
+</div>
 
-## ✨ Features
+<hr/>
 
-- **🌐 Tri-lingual Support**: Supports American Sign Language (ASL), Indian Sign Language (ISL), and Tamil Sign Language (TSL).
-- **⚡ Real-Time In-Browser Detection**: Utilizes MediaPipe Hand Landmarker combined with a Transformer + BiLSTM architecture to accurately classify 220+ signs under 200ms latency.
-- **🗣️ Sign-to-Speech & Speech-to-Sign**: Converts live hand signs into spoken audio, and spoken words into animated, anatomically correct 2D hand sign avatars.
-- **🚨 Emergency Mode**: High-priority alert phrase detection (e.g., "I need help", "Call an ambulance") using rule-based algorithms with zero dependency on the internet.
-- **📚 Interactive Learning Center**: Gamified learning modules to help users practice ASL, ISL, and TSL. Includes real-time camera feedback on accuracy.
-- **🔒 Guest Restrictions**: Dedicated roles restricting specific modules (Learning, Workplace, Expression) to registered accounts to encourage user retention.
-- **💎 Premium UI/UX**: High-end glassmorphic dark theme built with TailwindCSS techniques compiled into standard CSS for optimal performance.
+## 🎯 The Vision
 
----
+**SilentVoice** is engineered to provide seamless, real-time two-way translation between spoken language and three distinct sign languages (**ASL, ISL, and TSL**). By eliminating the dependence on human interpreters, SilentVoice aims to foster inclusive communication in learning centers, workplaces, and everyday situations.
 
-## 🛠️ Architecture
+## ✨ Core Features
 
-SilentVoice uses a dual-engine architecture to ensure privacy, speed, and accuracy.
+| Feature | Description |
+| :--- | :--- |
+| **🌐 Tri-lingual Recognition** | Native support for **American (ASL)**, **Indian (ISL)**, and **Tamil Sign Language (TSL)**, tailored to linguistic nuances. |
+| **⚡ Ultra-Low Latency** | Client-side MediaPipe Hand Landmarking meets a Transformer + BiLSTM architecture, achieving high-accuracy detection (<200ms latency) on **220+ signs**. |
+| **🔄 Bi-Directional Translation** | **Sign-to-Speech:** Converts dynamic hand gestures into spoken audio.<br>**Speech-to-Sign:** Animates spoken words into anatomically correct 2D hand sign avatars. |
+| **🚨 Emergency Mode** | Built-in offline phrase recognition algorithms capable of identifying critical phrases (e.g., "I need help", "Call an ambulance") without internet access. |
+| **🎮 Interactive Learning** | Gamified modules designed to help users practice ASL, ISL, and TSL, providing real-time camera-based feedback on posture and accuracy. |
+| **🔒 Secure Role-Based Access** | Guest restrictions for premium modules (Learning, Workplace, Expression) using secure SQLite + JWT authentication to promote engagement. |
+| **✨ Premium UX/UI** | Immersive, high-end glassmorphic dark theme powered by TailwindCSS, optimized and compiled for unmatched rendering speed. |
 
-1.  **Frontend (Next.js + React)**
-    *   **MediaPipe Tasks Vision**: Extracts 21 3D landmarks for both hands, entirely client-side. No video streams are transmitted, preserving privacy.
-    *   **Web Speech API**: Handles Speech-to-Text (STT) and Text-to-Speech (TTS).
-    *   **WebSocket Client**: Streams normalized, lightweight hand landmark coordinates to the backend payload.
-2.  **Backend (FastAPI + PyTorch)**
-    *   **Dual-Pipeline Engine**:
-        *   **Static Signs (A-Z, 0-9, Tamil Letters)**: Uses dynamic **Template Matching** directly against the anatomical pose library (`sign_library.py`) when low-motion is detected. Holding a static sign for 8 frames returns the prediction immediately.
-        *   **Dynamic Signs (Phrases, Words)**: Uses a rolling sliding window buffer fed into the **Sign Language Transformer (BiLSTM + Mean Pool)** model.
-    *   **Authentication Hub**: Built-in SQLite + JWT structure to handle users.
+## 🏗️ System Architecture
 
-### Accuracy Specs (Synthetic Baseline)
-*   **Model Capacity**: 256 d_model, 8 heads, 4 layers, ~1.5M parameters
-*   **Augmentations**: Frame dropping (missed camera detection simulation), 3D spatial rotation, position shifting, and scaling.
-*   **Validation Goal**: 85%–95% baseline accuracy across 220+ distinct signs.
+SilentVoice employs a robust dual-engine architecture designed for **privacy, speed, and accuracy**.
 
----
+### 1. Frontend Engine (Next.js + React)
+- **Privacy First:** MediaPipe Tasks Vision extracts 21 crucial 3D landmarks for both hands entirely on the client-side. No video data ever leaves your device.
+- **Accessibility Integration:** Utilizes the Web Speech API for seamless native Speech-to-Text (STT) and Text-to-Speech (TTS).
+- **Optimized Data Streaming:** A WebSocket Client transmits only lightweight, normalized coordinate payloads rather than heavy video frames.
 
-## 🚀 Installation & Setup
+### 2. Backend Engine (FastAPI + PyTorch)
+- **Dual-Pipeline Interpreter:**
+  - **Static Signs (Alphabets/Numbers):** Instantaneous dynamic **Template Matching** against the `sign_library.py` anatomical pose database. Triggers under 8 frames of low motion.
+  - **Dynamic Signs (Words/Phrases):** Analyzed via a sliding window buffer fed through a hybrid **Transformer (BiLSTM + Mean Pool)** deep learning model.
+- **Authentication Hub:** Secure, lightweight user management using SQLite and JWT.
+
+```mermaid
+graph LR
+    A[Client Browser] -->|Webcam Data| B[MediaPipe Vision]
+    B -->|3D Landmarks| C{WebSocket}
+    C -->|Normalized Data| D[FastAPI Backend]
+    
+    D --> E{Motion Detector}
+    E -->|Low Motion| F[Template Matching Engine]
+    E -->|High Motion| G[Transformer / BiLSTM Model]
+    
+    F --> H[Prediction]
+    G --> H
+    H -->|Text / Audio| C
+```
+
+## 📊 Model & Accuracy Metrics
+
+The deep learning model is built to ensure consistent recognition under variable conditions.
+
+- **Architecture:** 256 `d_model`, 8 Attention Heads, 4 Layers (~1.5M parameters).
+- **Data Augmentations:** Deep synthesis involving 3D spatial rotation, position shifting, scale variance, and random frame dropping to simulate missed camera detections.
+- **Target Accuracy:** **85%–95%** across the entire 220+ sign vocabulary.
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
-*   Node.js 18+
-*   Python 3.10+
-*   NPM & pip
+- **Node.js:** v18 or newer
+- **Python:** v3.10 or newer
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/silentvoice.git
-cd silentvoice
+git clone https://github.com/Dharaanishan-3105/SilentVoice.git
+cd SilentVoice
 ```
 
-### 2. Setup Backend
-Open a terminal in the `/backend` folder.
+### 2. Initialize the Backend
+Set up your Python virtual environment and install dependencies.
 ```bash
 cd backend
 python -m venv venv
-# Windows
+
+# Activate Virtual Environment (Windows)
 venv\Scripts\activate
-# Mac/Linux
+# Activate Virtual Environment (Mac/Linux)
 source venv/bin/activate
 
+# Install requirements
 pip install -r requirements.txt
 ```
 
-### 3. Setup Frontend
-Open a new terminal in the `/frontend` folder.
+### 3. Initialize the Frontend
+Install Node packages for the web interface.
 ```bash
-cd frontend
+cd ../frontend
 npm install
 ```
 
-### 4. Running the Application
-You will need to run both the frontend and backend servers simultaneously.
+### 4. Launch the Servers
+To run SilentVoice, you need both the frontend and backend running concurrently.
 
-**Terminal 1 (Backend)**:
+**Terminal 1 (Backend - FastAPI)**
 ```bash
 cd backend
+# With virtual environment activated
 python main.py
 ```
-*Runs on `http://localhost:8000`*
+*Server runs on `http://localhost:8000`*
 
-**Terminal 2 (Frontend)**:
+**Terminal 2 (Frontend - Next.js)**
 ```bash
 cd frontend
 npm run dev
 ```
-*Runs on `http://localhost:3000`*
+*Web app runs on `http://localhost:3000`*
 
----
+## 🧠 Model Training & Retraining
 
-## 🧠 Training the Model
-
-If you wish to augment the vocabulary or view the model in action, you can generate the synthetic dataset and rebuild the deep learning weights.
+Want to add custom vocabulary or retrain weights with new data? The synthetic generator and training scripts are fully accessible.
 
 ```bash
 cd backend
+# Generates synthetic data via augmentation and trains the Transformer
 python train.py --epochs 60 --samples 800
 ```
-*Note: Due to the expanded augmentations (rotation, jitter, scaling, and frame-drops), generating the dataset and training the transformer takes roughly 15-30 minutes depending on your CUDA availability.*
+*> **Note:** Depending on your CUDA configuration, generating augmented samples (rotation, jitter, drops) and compiling the weights may take **15-30 minutes**.*
 
----
+## 🤝 Contributing
+
+We welcome community contributions! Please feel free to submit issues, open pull requests, and contribute to making SilentVoice more accurate and accessible.
 
 ## 📄 License & Credits
 
-© 2026 Dharaanishan. All rights reserved. 
-Built to make communication accessible for everyone, everywhere.
+© 2026 Dharaanishan. All rights reserved.<br>
+*Built to make communication accessible for everyone, everywhere.*
