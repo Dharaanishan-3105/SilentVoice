@@ -1,11 +1,11 @@
 <div align="center">
   <img src="frontend/public/logo.png" width="200" alt="SilentVoice Logo" style="border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
 
-  # 🌟 SilentVoice
+  # **SilentVoice**
 
-  **Next-Generation Web-Based AI Sign Language Translator**
+  **AI Sign Language Communication Platform**
 
-  *Breaking the barrier between hearing and Deaf individuals through real-time, browser-based, AI-powered communication.*
+  * That bridges the gap between spoken language and sign language in real time.*
 
   [![Next.js](https://img.shields.io/badge/Next.js-15.1-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
   [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
