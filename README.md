@@ -5,7 +5,7 @@
 
   **AI Sign Language Communication Platform**
 
-  * That bridges the gap between spoken language and sign language in real time.*
+  *That bridges the gap between spoken language and sign language in real time.*
 
   [![Next.js](https://img.shields.io/badge/Next.js-15.1-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
   [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
